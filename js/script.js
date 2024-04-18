@@ -254,7 +254,7 @@ async function displayTvDetails() {
                     <i class="fas fa-star text-primary"></i>
                     ${rating} / 10
                 </p>
-                <p class="text-muted">Release Date: XX/XX/XXXX</p>
+                <p class="text-muted">Release Date: ${releaseDate}</p>
                 <p>${details}</p>
                 <h5>Genres</h5>
                 <ul class="list-group">
@@ -300,7 +300,6 @@ function displayBackdrop(backdropPath) {
     } else if (genre === "tv-details") {
         document.getElementById("show-details").appendChild(overlayDiv);
     }
-
 }
 
 // add Comma To Numbers
@@ -388,17 +387,70 @@ function detectPage() {
         .classList.toggle("disable", currentPage === 1);
 }
 
+// displaySlider
+async function displaySlider(endpoint, type) {
+    const { results } = await fetchingTMDB(endpoint);
+    const data = results.map((obj) => {
+        return {
+            id: obj.id,
+            img: obj.poster_path,
+            name: obj.original_title,
+            rate: obj.vote_average,
+        };
+    });
+    data.forEach((item) => {
+        const swiperDiv = document.createElement("div");
+        swiperDiv.classList.add("swiper-slide");
+        swiperDiv.innerHTML = ` <a href="${type}-details.html?id=${item.id}">
+                <img
+                    src="https://image.tmdb.org/t/p/w500${item.img}"
+                    alt="Movie Title"
+                />
+            </a>
+            <h4 class="swiper-rating">
+                <i class="fas fa-star text-secondary"></i> ${item.rate} / 10
+            </h4>`;
+        document.querySelector(".swiper-wrapper").appendChild(swiperDiv);
+    });
+    initSwiper();
+}
+function initSwiper() {
+    const swipe = new Swiper(".swiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        freeMode: true,
+        loop: true,
+        autoplay: {
+            delay: 4000,
+            disable: false,
+        },
+        breakpoints: {
+            500: {
+                slidesPerView: 2,
+            },
+            700: {
+                slidesPerView: 3,
+            },
+            1200: {
+                slidesPerView: 4,
+            },
+        },
+    });
+}
+
 // init app
 function init() {
     switch (global.currentPage) {
         case "/":
         case "/index.html":
             genre = "movies";
+            displaySlider("movie/now_playing", "movie");
             displayPopularMovies();
             pagination();
             break;
         case "/shows.html":
             genre = "tv-show";
+            displaySlider("tv/on_the_air", "tv");
             displayPopularShows();
             pagination();
             break;

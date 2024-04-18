@@ -7,26 +7,27 @@ const global = {
         Authorization:
             "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlMzY2NzhjMGE1NzIyZGM1NWI5MzlmMmFjYTkyZWIyYiIsInN1YiI6IjY2MWQwZGQyNmY0M2VjMDE4NzVkNmE4YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.prZBb5iVDlIACrMro8_1kEaFDTNlWhip_HoRTxqgnkY",
     },
+    totalPages: 5,
 };
+
 let currentPage = 1;
 let genre;
 
-
 // FetchingData From TMDB
 async function fetchingTMDB(endpoint, queries = "") {
-    showSpinner();
     const response = await fetch(`${global.api}${endpoint}${queries}`, {
         method: "GET",
         headers: global.headers,
     });
+    showSpinner();
     const data = await response.json();
     hideSpinner();
     return data;
 }
 
 // displayPopularMovies
-async function displayPopularMovies(endpoint, queries = "") {
-    const { results } = await fetchingTMDB(endpoint, queries);
+async function displayPopularMovies(queries = "") {
+    const { results } = await fetchingTMDB("movie/popular", queries);
     const movieList = document.getElementById("popular-movies");
     movieList.innerHTML = "";
     detectPage();
@@ -39,7 +40,6 @@ async function displayPopularMovies(endpoint, queries = "") {
             poster_path: moviePoster,
             overview,
         } = movie;
-        console.log();
         card.classList.add("card");
         card.innerHTML = `
         <div class="card-front">
@@ -83,8 +83,8 @@ async function displayPopularMovies(endpoint, queries = "") {
 }
 
 // displayPopularShows
-async function displayPopularShows(endpoint, queries = "") {
-    const { results } = await fetchingTMDB(endpoint, queries);
+async function displayPopularShows(queries = "") {
+    const { results } = await fetchingTMDB("tv/popular", queries);
     const showList = document.getElementById("popular-shows");
     showList.innerHTML = "";
     detectPage();
@@ -138,6 +138,175 @@ async function displayPopularShows(endpoint, queries = "") {
         showList.appendChild(card);
     });
 }
+
+// displayMovieDetails
+async function displayMovieDetails() {
+    const movieId = window.location.search.split("=")[1];
+    const movieDetailsItem = document.getElementById("movie-details");
+
+    const {
+        backdrop_path: backGround,
+        original_title: movieName,
+        overview: details,
+        poster_path: moviePoster,
+        release_date,
+        vote_average: rating,
+        genres,
+        homepage,
+        budget,
+        revenue,
+        runtime,
+        status,
+        production_companies,
+    } = await fetchingTMDB(`movie/${movieId}`);
+    //Overlay BackDrop
+    displayBackdrop(backGround);
+
+    // create movie element
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+        <div class="details-top">
+            <div>
+                <img src="https://image.tmdb.org/t/p/w500${moviePoster}"
+                class="card-img-top" alt="${movieName}" />
+            </div>
+            <div>
+                <h2>${movieName}</h2>
+                <p>
+                    <i class="fas fa-star text-primary"></i>
+                    ${rating} / 10
+                </p>
+                <p class="text-muted">Release Date: ${release_date}</p>
+                <p>${details}</p>
+                <h5>Genres</h5>
+                <ul class="list-group">
+                    ${genres.forEach((gen) => {
+                        `<li>${gen.name}</li>`;
+                    })}
+                </ul>
+                <a href="${homepage}" target="_blank" class="btn"
+                    >Visit Movie Homepage</a
+                >
+            </div>
+        </div>
+        <div class="details-bottom">
+            <h2>Movie Info</h2>
+            <ul>
+                <li><span class="text-secondary">Budget:</span> $${addComa(
+                    budget
+                )}</li>
+                <li>
+                    <span class="text-secondary">Revenue:</span> $${addComa(
+                        revenue
+                    )}
+                </li>
+                <li>
+                    <span class="text-secondary">Runtime:</span> ${runtime}
+                    minutes
+                </li>
+                <li><span class="text-secondary">Status:</span> ${status}</li>
+            </ul>
+            <h4>Production Companies</h4>
+            <div class="list-group">
+
+            </div>
+            ${production_companies.map((com) => `${com.name}`).join(" , ")}
+        </div>
+    `;
+    movieDetailsItem.appendChild(div);
+}
+async function displayTvDetails() {
+    const tvID = window.location.search.split("=")[1];
+    const tvDetailsItem = document.getElementById("show-details");
+    const {
+        backdrop_path: backGround,
+        original_name: showName,
+        number_of_episodes: totalEpisodes,
+        overview: details,
+        poster_path: showPoster,
+        first_air_date: releaseDate,
+        last_episode_to_air: lastEpisode,
+        vote_average: rating,
+        genres,
+        homepage,
+        status,
+        production_companies,
+    } = await fetchingTMDB(`tv/${tvID}`);
+    //Overlay BackDrop
+    displayBackdrop(backGround);
+
+    // create movie element
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+        <div class="details-top">
+            <div>
+                <img
+                    src="https://image.tmdb.org/t/p/w500${showPoster}"
+                    class="card-img-top"
+                    alt="Show Name"
+                />
+            </div>
+            <div>
+                <h2>${showName}</h2>
+                <p>
+                    <i class="fas fa-star text-primary"></i>
+                    ${rating} / 10
+                </p>
+                <p class="text-muted">Release Date: XX/XX/XXXX</p>
+                <p>${details}</p>
+                <h5>Genres</h5>
+                <ul class="list-group">
+                    ${genres
+                        .map((gen) => {
+                            `<li>${gen.name}</li>`;
+                        })
+                        .join("")}
+                </ul>
+                <a href="${homepage}" target="_blank" class="btn"
+                    >Visit Show Homepage</a
+                >
+            </div>
+        </div>
+        <div class="details-bottom">
+            <h2>Show Info</h2>
+            <ul>
+                <li>
+                    <span class="text-secondary">Number Of Episodes:</span>
+                    ${totalEpisodes}
+                </li>
+                <li>
+                    <span class="text-secondary">Last Episode To Air:</span>
+                    ${lastEpisode.name}
+                </li>
+                <li><span class="text-secondary">Status:</span> ${status}</li>
+            </ul>
+            <h4>Production Companies</h4>
+            <div class="list-group">
+            ${production_companies.map((com) => `${com.name}`).join(" , ")}
+            </div>
+        </div>
+    `;
+    tvDetailsItem.appendChild(div);
+}
+// overLay
+function displayBackdrop(backdropPath) {
+    const overlayDiv = document.createElement("div");
+    overlayDiv.style.backgroundImage = `url(https://image.tmdb.org/t/p/original/${backdropPath})`;
+    overlayDiv.classList.add("overlay");
+    if (genre === "movie-details") {
+        document.getElementById("movie-details").appendChild(overlayDiv);
+    } else if (genre === "tv-details") {
+        document.getElementById("show-details").appendChild(overlayDiv);
+    }
+
+}
+
+// add Comma To Numbers
+function addComa(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 // highlight active link
 function highlightActiveLink() {
     const pages = document.querySelectorAll(".nav-link");
@@ -147,6 +316,7 @@ function highlightActiveLink() {
         }
     });
 }
+
 // Spinner Toggle
 function showSpinner() {
     document.querySelector(".spinner").classList.remove("hidden");
@@ -154,43 +324,47 @@ function showSpinner() {
 function hideSpinner() {
     document.querySelector(".spinner").classList.add("hidden");
 }
+
 // Pagination
-function pagination(endpoint, totalPages) {
+function pagination() {
     const pageContainer = document.querySelector(".pagination");
     pageContainer.addEventListener("click", (e) => {
         e.preventDefault();
         const target = e.target.parentElement.id;
         switch (target) {
             case "next":
-                changePage(currentPage + 1, endpoint, totalPages);
+                changePage(++currentPage);
                 break;
             case "prev":
-                changePage(currentPage - 1, endpoint, totalPages);
+                changePage(--currentPage);
                 break;
             default:
                 const pageNum = parseInt(target);
-                if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= totalPages) {
-                    changePage(pageNum, endpoint, totalPages);
+                if (
+                    !isNaN(pageNum) &&
+                    pageNum >= 1 &&
+                    pageNum <= global.totalPages
+                ) {
+                    changePage(pageNum);
                 }
         }
     });
 }
 
-function changePage(newPage, endpoint, totalPages) {
+function changePage(newPage) {
     if (newPage < 1) {
         newPage = 1;
-    } else if (newPage > totalPages) {
-        newPage = totalPages;
+    } else if (newPage > global.totalPages) {
+        newPage = global.totalPages;
     }
 
     currentPage = newPage;
     switch (genre) {
         case "movies":
-            displayPopularMovies(endpoint, `?page=${currentPage}`);
+            displayPopularMovies(`?page=${currentPage}`);
             break;
         case "tv-show":
-            console.log(genre);
-            displayPopularShows(endpoint, `?page=${currentPage}`);
+            displayPopularShows(`?page=${currentPage}`);
             break;
         default:
             break;
@@ -219,23 +393,24 @@ function init() {
     switch (global.currentPage) {
         case "/":
         case "/index.html":
-            displayPopularMovies("movie/popular");
             genre = "movies";
-            pagination("movie/popular", 5);
+            displayPopularMovies();
+            pagination();
             break;
         case "/shows.html":
-            displayPopularShows("tv/popular?page=1");
             genre = "tv-show";
-            pagination("tv/popular", 5);
+            displayPopularShows();
+            pagination();
             break;
         case "/movie-details.html":
-            console.log("Movie-details");
+            genre = "movie-details";
+            displayMovieDetails();
             break;
         case "/tv-details.html":
-            console.log("Tv-details");
+            genre = "tv-details";
+            displayTvDetails();
             break;
         case "/search.html":
-            console.log("Search");
             break;
         default:
             console.log("Error Page Not Found");

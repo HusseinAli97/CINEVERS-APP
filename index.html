@@ -8,9 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="lib/swiper.css" />
   <link rel="stylesheet" href="lib/fontawesome.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/spinner.css" />
+  <script src="lib/swiper.js"></script>
   <script src="js/script.js" defer></script>
   <title>Flixx</title>
 </head>
@@ -35,9 +37,49 @@
     </div>
   </header>
 
-  <!-- Popular TV Shows -->
+  <!-- Now Playing Section -->
+  <section class="now-playing">
+    <h2>Now Playing</h2>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <!-- <div class="swiper-slide">
+            <a href="movie-details.html?id=1">
+              <img src="./images/no-image.jpg" alt="Movie Title" />
+            </a>
+            <h4 class="swiper-rating">
+              <i class="fas fa-star text-secondary"></i> 8 / 10
+            </h4>
+          </div> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Movies -->
+  <section class="search">
+
+    <div class="container">
+      <div id="alert"></div>
+      <form action="/search.html" class="search-form">
+        <!-- movies and shows radio box -->
+        <div class="search-radio">
+          <input type="radio" id="movie" name="type" value="movie" checked />
+          <label for="movies">Movies</label>
+          <input type="radio" id="tv" name="type" value="tv" />
+          <label for="shows">TV Shows</label>
+        </div>
+        <div class="search-flex">
+          <input type="text" name="search-term" id="search-term" placeholder="Enter search term" />
+          <button class="btn" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Popular Movies -->
   <section class="container">
-    <h2>Popular TV Shows</h2>
+    <h2>Popular Movies</h2>
     <ul class="pagination">
       <li id="prev">
         <a href="#">Prev</a>
@@ -61,9 +103,8 @@
         <a href="#">Next</a>
       </li>
     </ul>
-    <div id="popular-shows" class="grid">
+    <div id="popular-movies" class="grid">
 
-    </div>
     </div>
   </section>
 

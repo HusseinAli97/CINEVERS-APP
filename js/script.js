@@ -691,13 +691,11 @@ function init() {
             global.media.genre = "movies";
             displaySlider("trending/movie/week", "movie");
             displayPopularMovies();
-            // pagination();
             break;
         case "/shows.html":
             global.media.genre = "tv-show";
             displaySlider("trending/tv/week", "tv");
             displayPopularShows();
-            // pagination();
             break;
         case "/movie-details.html":
             global.media.genre = "movie-details";

@@ -11,17 +11,16 @@
   <link rel="stylesheet" href="lib/swiper.css" />
   <link rel="stylesheet" href="lib/fontawesome.css" />
   <!-- Css Local -->
-  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/spinner.css" />
-  <title>Flixx</title>
+  <link rel="stylesheet" href="css/style.min.css" />
+  <title>CINEVERS</title>
 </head>
 
 <body>
-  <header class="main-header">
+ <header class="main-header">
     <div class="container">
       <div class="logo">
         <a href="/"><img src="images/logo.png" class="logo-img" alt="Logo"></a>
-        <a href="/">FLIXX</a>
       </div>
       <nav>
         <ul>
@@ -42,42 +41,34 @@
       <div class="swiper-wrapper"></div>
     </div>
   </section>
+
+
   <!-- Popular TV Shows -->
   <section class="container">
     <h2>Popular TV Shows</h2>
-    <ul class="pagination">
-      <li id="prev">
-        <a href="#">Prev</a>
-      </li>
-      <li id="1">
-        <a href="#">1</a>
-      </li>
-      <li id="2">
-        <a href="#">2</a>
-      </li>
-      <li id="3">
-        <a href="#">3</a>
-      </li>
-      <li id="4">
-        <a href="#">4</a>
-      </li>
-      <li id="5">
-        <a href="#">5</a>
-      </li>
-      <li id="next">
-        <a href="#">Next</a>
-      </li>
-    </ul>
+
     <div id="popular-shows" class="grid">
+      <div class="pagination-wrapper">
+        <ul class="pagination">
+
+        </ul>
+      </div>
 
     </div>
-    </div>
+
   </section>
 
   <!-- Footer -->
   <footer class="main-footer">
     <div class="container">
-      <div class="logo"><span>FLIXX</span></div>
+      <div class="logo">
+        <a href="/">
+          <img src="images/logo.png" class="logo-img" alt="Logo">
+        </a>
+        <a href="/">
+          CINEVERS
+        </a>
+      </div>
       <div class="social-links">
         <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
         <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -86,10 +77,12 @@
     </div>
   </footer>
 
-  <div class="spinner"></div>
+  <div class="spinner">
+    <span class="loader"></span>
+  </div>
   <!-- JS FIles -->
   <script src="lib/swiper.js"></script>
-  <script src="js/script.js" defer></script>
+  <script src="js/script.min.js" defer></script>
 </body>
 
 </html>

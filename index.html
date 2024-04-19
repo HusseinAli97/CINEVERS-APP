@@ -5,16 +5,18 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- favicon -->
+  <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
   <!-- fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
   <!-- Css Lib -->
   <link rel="stylesheet" href="lib/swiper.css" />
   <link rel="stylesheet" href="lib/fontawesome.css" />
   <!-- Css Local -->
-  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/spinner.css" />
+  <link rel="stylesheet" href="css/style.min.css" />
 
-  <title>Flixx</title>
+  <title>CINEVERS</title>
 </head>
 
 <body>
@@ -22,7 +24,6 @@
     <div class="container">
       <div class="logo">
         <a href="/"><img src="images/logo.png" class="logo-img" alt="Logo"></a>
-        <a href="/">FLIXX</a>
       </div>
       <nav>
         <ul>
@@ -47,7 +48,6 @@
 
   <!-- Search Movies -->
   <section class="search">
-
     <div class="container">
       <div id="alert"></div>
       <form action="/search.html" class="search-form">
@@ -71,29 +71,11 @@
   <!-- Popular Movies -->
   <section class="container">
     <h2>Popular Movies</h2>
-    <ul class="pagination">
-      <li id="prev">
-        <a href="#">Prev</a>
-      </li>
-      <li id="1">
-        <a href="#">1</a>
-      </li>
-      <li id="2">
-        <a href="#">2</a>
-      </li>
-      <li id="3">
-        <a href="#">3</a>
-      </li>
-      <li id="4">
-        <a href="#">4</a>
-      </li>
-      <li id="5">
-        <a href="#">5</a>
-      </li>
-      <li id="next">
-        <a href="#">Next</a>
-      </li>
-    </ul>
+    <div class="pagination-wrapper">
+      <ul class="pagination">
+
+      </ul>
+    </div>
     <div id="popular-movies" class="grid">
 
     </div>
@@ -102,7 +84,14 @@
   <!-- Footer -->
   <footer class="main-footer">
     <div class="container">
-      <div class="logo"><span>FLIXX</span></div>
+      <div class="logo">
+        <a href="/">
+          <img src="images/logo.png" class="logo-img" alt="Logo">
+        </a>
+        <a href="/">
+          CINEVERS
+        </a>
+      </div>
       <div class="social-links">
         <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
         <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -111,11 +100,13 @@
     </div>
   </footer>
 
-  <div class="spinner"></div>
+  <div class="spinner">
+    <span class="loader"></span>
+  </div>
 
   <!-- JS FIles -->
   <script src="lib/swiper.js"></script>
-  <script src="js/script.js" defer></script>
+  <script src="js/script.min.js" defer></script>
 </body>
 
 </html>

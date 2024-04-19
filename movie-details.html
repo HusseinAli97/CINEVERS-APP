@@ -9,18 +9,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="lib/fontawesome.css" />
-  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/spinner.css" />
-  <script src="js/script.js" defer></script>
-  <title>Flixx | Movie Details</title>
+  <link rel="stylesheet" href="css/style.min.css" />
+  <script src="js/script.min.js" defer></script>
+  <title>CINEVERS | Movie Details</title>
 </head>
 
 <body>
-  <header class="main-header">
+ <header class="main-header">
     <div class="container">
       <div class="logo">
         <a href="/"><img src="images/logo.png" class="logo-img" alt="Logo"></a>
-        <a href="/">FLIXX</a>
       </div>
       <nav>
         <ul>
@@ -49,7 +48,14 @@
   <!-- Footer -->
   <footer class="main-footer">
     <div class="container">
-      <div class="logo"><span>FLIXX</span></div>
+      <div class="logo">
+        <a href="/">
+          <img src="images/logo.png" class="logo-img" alt="Logo">
+        </a>
+        <a href="/">
+          CINEVERS
+        </a>
+      </div>
       <div class="social-links">
         <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
         <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -58,7 +64,9 @@
     </div>
   </footer>
 
-  <div class="spinner"></div>
+  <div class="spinner">
+    <span class="loader"></span>
+  </div>
 </body>
 
 </html>

@@ -9,10 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="lib/fontawesome.css" />
-  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/spinner.css" />
-  <script src="js/script.js" defer></script>
-  <title>Flixx | Search Movies & Shows</title>
+  <link rel="stylesheet" href="css/style.min.css" />
+  <script src="js/script.min.js" defer></script>
+  <title>CINEVERS | Search Movies & Shows</title>
 </head>
 
 <body>
@@ -20,7 +20,6 @@
     <div class="container">
       <div class="logo">
         <a href="/"><img src="images/logo.png" class="logo-img" alt="Logo"></a>
-        <a href="/">FLIXX</a>
       </div>
       <nav>
         <ul>
@@ -59,109 +58,27 @@
   <!-- Search Results -->
   <section id="search-results-wrapper" class="container">
     <heading id="search-results-heading"></heading>
+    <div class="pagination-wrapper">
+      <ul class="pagination">
+
+      </ul>
+    </div>
     <div id="search-results" class="grid">
-      <div class="card">
-        <a href="#">
-          <img src="images/no-image.jpg" class="card-img-top" alt="" />
-        </a>
-        <div class="card-body">
-          <h5 class="card-title">Movie Or Show Name</h5>
-          <p class="card-text">
-            <small class="text-muted">Release: XX/XX/XXXX</small>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <a href="#">
-          <img src="images/no-image.jpg" class="card-img-top" alt="" />
-        </a>
-        <div class="card-body">
-          <h5 class="card-title">Movie Or Show Name</h5>
-          <p class="card-text">
-            <small class="text-muted">Release: XX/XX/XXXX</small>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <a href="#">
-          <img src="images/no-image.jpg" class="card-img-top" alt="" />
-        </a>
-        <div class="card-body">
-          <h5 class="card-title">Movie Or Show Name</h5>
-          <p class="card-text">
-            <small class="text-muted">Release: XX/XX/XXXX</small>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <a href="#">
-          <img src="images/no-image.jpg" class="card-img-top" alt="" />
-        </a>
-        <div class="card-body">
-          <h5 class="card-title">Movie Or Show Name</h5>
-          <p class="card-text">
-            <small class="text-muted">Release: XX/XX/XXXX</small>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <a href="#">
-          <img src="images/no-image.jpg" class="card-img-top" alt="" />
-        </a>
-        <div class="card-body">
-          <h5 class="card-title">Movie Or Show Name</h5>
-          <p class="card-text">
-            <small class="text-muted">Release: XX/XX/XXXX</small>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <a href="#">
-          <img src="images/no-image.jpg" class="card-img-top" alt="" />
-        </a>
-        <div class="card-body">
-          <h5 class="card-title">Movie Or Show Name</h5>
-          <p class="card-text">
-            <small class="text-muted">Release: XX/XX/XXXX</small>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <a href="#">
-          <img src="images/no-image.jpg" class="card-img-top" alt="" />
-        </a>
-        <div class="card-body">
-          <h5 class="card-title">Movie Or Show Name</h5>
-          <p class="card-text">
-            <small class="text-muted">Release: XX/XX/XXXX</small>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <a href="#">
-          <img src="images/no-image.jpg" class="card-img-top" alt="" />
-        </a>
-        <div class="card-body">
-          <h5 class="card-title">Movie Or Show Name</h5>
-          <p class="card-text">
-            <small class="text-muted">Release: XX/XX/XXXX</small>
-          </p>
-        </div>
-      </div>
     </div>
-    <div id="pagination">
-      <div class="pagination">
-        <button class="btn btn-primary" id="prev">Prev</button>
-        <button class="btn btn-primary" id="next">Next</button>
-        <div class="page-counter">Page 1 of 5</div>
-      </div>
-    </div>
+
   </section>
 
   <!-- Footer -->
   <footer class="main-footer">
     <div class="container">
-      <div class="logo"><span>FLIXX</span></div>
+      <div class="logo">
+        <a href="/">
+          <img src="images/logo.png" class="logo-img" alt="Logo">
+        </a>
+        <a href="/">
+          CINEVERS
+        </a>
+      </div>
       <div class="social-links">
         <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
         <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -170,7 +87,9 @@
     </div>
   </footer>
 
-  <div class="spinner"></div>
+  <div class="spinner">
+    <span class="loader"></span>
+  </div>
 </body>
 
 </html>
